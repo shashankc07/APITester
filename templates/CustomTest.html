@@ -1,0 +1,19 @@
+{% extends "dashboard_layout.html" %}
+
+{% block rightpanel %}
+
+<div class="col md-12">
+    <form method="POST" action="{{url_for('custom_test', user=user)}}">
+        <div class="mb-3">
+            <label for="URL" class="form-label">Request URL :</label>
+            <input type="text" class="form-control" id="URL" name="url">
+        </div>
+            <div class="mb-3">
+                <label for="Payload" class="form-label">Payload :</label>
+                <textarea class="form-control" id="Payload" name="payload"></textarea>
+            </div>
+        <button type="submit" class="btn btn-primary">Test</button>
+    </form>
+</div>
+
+{% endblock %}

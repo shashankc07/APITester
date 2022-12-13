@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <div class="container row">
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 250px; height: 100rem;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <div class="dropdown">
+      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <strong>{{user}}</strong>
+      </a>
+      <ul class="dropdown-menu text-small shadow">
+        <li><a class="dropdown-item" href="{{url_for('index')}}">Sign out</a></li>
+      </ul>
+    </div>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li>
+        <a href="{{url_for('realtime_dashboard', user=user)}}" class="nav-link link-dark">
+          <svg class="btn btn-toggle bi pe-none me-2" width="16" height="16"><use xlink:href="/Admin/Realtime"></use></svg>
+          Realtime
+        </a>
+      </li>
+      <li>
+        <a href="{{url_for('batch_dashboard', user=user)}}" class="nav-link link-dark">
+          <svg class="btn btn-toggle bi pe-none me-2" width="16" height="16"><use xlink:href="/Admin/Batch"></use></svg>
+          Batch
+        </a>
+      </li>
+      <li> 
+        <a href="{{url_for('online_dashboard', user=user)}}" class="nav-link link-dark">
+          <svg class="btn btn-toggle bi pe-none me-2" width="16" height="16"><use xlink:href="/Admin/Online"></use></svg>
+          Online
+        </a>
+      </li>
+      <li>
+        <a href="{{url_for('custom_test', user=user)}}" class="nav-link link-dark">
+          <svg class="btn btn-toggle bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+          Custom Test
+        </a>
+      </li>
+    </ul>
+    <hr>
+    </div>
+
+  {% block rightpanel %} {% endblock %}
+
+  </div>
+
+{% endblock %}

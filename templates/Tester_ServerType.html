@@ -1,0 +1,27 @@
+{% extends 'dashboard_layout.html' %}
+
+{% block rightpanel %}
+
+  <div class="col md-12">
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+      <h3 class="border-bottom pb-2 mb-0">{{server_type}}</h3>
+    <div class="d-flex text-muted pt-3">
+      <div class="pb-3 mb-0 small lh-sm w-100">
+        <table class="table table-hover">
+        {% for row in rows %}
+        <tr>
+          <div class="d-flex justify-content-between">
+            <td><strong class="text-gray-dark">{{row[0]}}</strong></td>
+            <td>Message flasher here...</td>
+            <td><a href="#"><button class="btn btn-primary">Test</button></a></td>
+          </div>
+        </tr>
+        {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+
+{% endblock %}

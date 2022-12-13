@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex h-100 text-center ">
+  <main class="px-3 form-signin">
+    <h1>BRF API Tester Dashboard</h1>
+
+    <form method="POST" action="{{url_for('login')}}">
+    <h1 class="h3 mb-3 fw-normal">Please Sign In</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput" placeholder="brfuser" name="user">
+      <label for="floatingInput">User ID</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="pass">
+      <label for="floatingPassword">Password</label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+  </form>
+    {% with messages = get_flashed_messages() %}
+
+      {% if messages %}
+          {% for message in messages %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+                  <strong>{{message}}</strong>
+              </div>
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+  </main>
+
+
+</div>
+
+{% endblock %}
