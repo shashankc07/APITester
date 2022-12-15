@@ -45,6 +45,9 @@ cur = con.cursor()
 #
 # con.commit()
 
-rows = cur.execute('SELECT DISTINCT environment FROM Endpoints WHERE server_type=?', ('Realtime',)).fetchall()
+# rows = cur.execute('''SELECT * FROM Endpoints WHERE server_type=? AND environment=?''',
+#                                   ('online', 'DIF')).fetchall()
+
+rows = rows = cur.execute('''SELECT * FROM Endpoints''').fetchall()
 for row in rows:
-    print(row[0])
+    print(row)
