@@ -12,11 +12,35 @@
         <tr>
           <div class="d-flex justify-content-between">
             <td><strong class="text-gray-dark">{{row[0]}}</strong></td>
-            <td>Message flasher here...</td>
-            <td><a href="#"><button class="btn btn-primary">Test</button></a></td>
+            <td>
+            </td>
+            <td>
+              <form method="post" action="{{url_for('run_test', user=user, server_type=server_type, env=env)}}">
+                <input type="hidden" name="endpoint" value="{{row[0]}}" />
+                <button class="btn btn-primary" type="submit" >Test</button>
+              </form>
+            </td>
           </div>
         </tr>
         {% endfor %}
+          <button class="btn btn-primary" type="submit" >Test All</button>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category,message in messages %}
+                  {% if category == "error" %}
+                    <div class="alert alert-dismissible alert-danger" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <strong>{{message}}</strong>
+                    </div>
+                  {% elif category == "success" %}
+                    <div class="alert alert-dismissible alert-success" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <strong>{{message}}</strong>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
         </table>
       </div>
     </div>

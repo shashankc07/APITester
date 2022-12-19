@@ -1,14 +1,15 @@
 import requests
 
+resource = "/DecisionService/rest/Miniloan/1.0/my_operation/1.3/WADL"
 
-def test_payload(url, payload):
-    req = requests.get(url, params=payload)
+
+def test_payload(endpoint, payload):
+    req = requests.get(endpoint+resource, params=payload)
     return req.text
 
 
-def test_url(url):
-    req = requests.get(url)
-    assert req.status_code == 200
+def test_url(endpoint):
+    req = requests.get(endpoint)
+    return req.status_code
 
 
-test_url('https://www.google.com')

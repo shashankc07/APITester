@@ -48,6 +48,7 @@ cur = con.cursor()
 # rows = cur.execute('''SELECT * FROM Endpoints WHERE server_type=? AND environment=?''',
 #                                   ('online', 'DIF')).fetchall()
 
-rows = rows = cur.execute('''SELECT * FROM Endpoints''').fetchall()
+rows = cur.execute('''SELECT endpoint FROM Endpoints WHERE server_type=? AND environment=?''',
+                            ('online', 'DIF')).fetchall()
 for row in rows:
     print(row)

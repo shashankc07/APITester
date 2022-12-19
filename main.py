@@ -22,7 +22,6 @@ def login():
                 cur = con.cursor()
                 check_password = cur.execute('SELECT password FROM Users WHERE user_id=?', (user,)).fetchone()[0]
                 if check_password is None or check_password != password:
-                    print('invalid password')
                     flash('Invalid Credentials !')
                     return redirect(url_for('index'))
                 else:
@@ -32,7 +31,6 @@ def login():
                         return redirect(url_for('admin_page'))
 
         except Exception as e:
-            print(e)
             flash('Invalid Credentials !')
             return redirect(url_for('index'))
     else:
@@ -126,6 +124,21 @@ def environment(user, server_type, env):
         return render_template('Tester_environment.html', user=user, server_type=server_type, env=env, rows=rows)
     else:
         return render_template('Admin_environment.html', user=user, server_type=server_type, env=env, rows=rows)
+
+
+@app.route('/<user>/<server_type>/<env>/run_test', methods=["POST", "GET"])
+def run_test(user, server_type, env):
+    if request.method == "POST":
+        endpoint = request.form['endpoint']
+        print(endpoint)
+        resp = test_url(endpoint)
+        if resp < 300:
+            flash("{} Validated Successfully !".format(endpoint), "success")
+        else:
+            flash("Oops ! something went wrong with {}!".format(endpoint), "error")
+        return redirect(url_for('environment', user=user, server_type=server_type, env=env))
+    else:
+        return redirect(url_for('environment', user=user, server_type=server_type, env=env))
 
 
 if __name__ == "__main__":
