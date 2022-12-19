@@ -4,7 +4,12 @@
 
   <div class="col md-12">
     <div class="my-3 p-3 bg-body rounded shadow-sm">
-      <h3 class="border-bottom pb-2 mb-0">{{server_type}} > {{env}}  <button class="btn btn-primary float-right" type="submit" >Test All</button></h3>
+      <h3 class="border-bottom pb-2 mb-0">{{server_type}} > {{env}}
+        <form method="post" action="{{url_for('environment', user=user, server_type=server_type, env=env)}}">
+          <input type="hidden" name="endpoint" value="submit" />
+          <button class="btn btn-primary float-right" type="submit" >Test All</button>
+        </form>
+      </h3>
     <div class="d-flex text-muted pt-3">
       <div class="pb-3 mb-0 small lh-sm w-100">
         <table class="table table-hover">

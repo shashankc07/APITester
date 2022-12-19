@@ -41,14 +41,14 @@ cur = con.cursor()
 # VALUES ('https://www.youtube.com', 'online', 'DIF'); ''')
 #
 # cur.execute(''' INSERT INTO Endpoints (endpoint, server_type, environment)
-# VALUES ('https://www.youtube.com', 'online', 'SE'); ''')
+# VALUES ('https://www.youtu.com', 'Realtime', 'SE'); ''')
 #
 # con.commit()
 
 # rows = cur.execute('''SELECT * FROM Endpoints WHERE server_type=? AND environment=?''',
 #                                   ('online', 'DIF')).fetchall()
 
-rows = cur.execute('''SELECT endpoint FROM Endpoints WHERE server_type=? AND environment=?''',
-                            ('online', 'DIF')).fetchall()
-for row in rows:
-    print(row)
+# rows = cur.execute('''SELECT endpoint FROM Endpoints WHERE server_type=? AND environment=?''',
+#                             ('online', 'DIF')).fetchall()
+# for row in rows:
+#     print(row[0])

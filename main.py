@@ -114,12 +114,21 @@ def custom_test(user):
         return render_template('CustomTest.html', user=user)
 
 
-@app.route("/<user>/<server_type>/<env>")
+@app.route("/<user>/<server_type>/<env>", methods=['POST', 'GET'])
 def environment(user, server_type, env):
     with sq.connect("test.db") as con:
         cur = con.cursor()
         rows = cur.execute('''SELECT endpoint FROM Endpoints WHERE server_type=? AND environment=?''',
                             (server_type, env)).fetchall()
+    if request.method == 'POST':
+        flag = True
+        for row in rows:
+            if test_url(row[0]) > 300:
+                flag = False
+        if flag is True:
+            flash("{}  Validated Successfully !".format(env), "success")
+        else:
+            flash("{}  Have some issues ! Reach out to BRF Team !".format(env), "error")
     if user == 'Tester':
         return render_template('Tester_environment.html', user=user, server_type=server_type, env=env, rows=rows)
     else:

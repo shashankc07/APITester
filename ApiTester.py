@@ -9,7 +9,10 @@ def test_payload(endpoint, payload):
 
 
 def test_url(endpoint):
-    req = requests.get(endpoint)
+    try:
+        req = requests.get(endpoint)
+    except Exception as e:
+        return 1000
     return req.status_code
 
 
