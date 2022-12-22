@@ -49,36 +49,12 @@ def admin_page():
     return render_template('AdminHome.html', user=user)
 
 
-@app.route("/<user>/Realtime")
-def realtime_dashboard(user):
+@app.route("/<user>/<server_type>")
+def server_type_dashboard(user, server_type):
     with sq.connect("test.db") as con:
         cur = con.cursor()
-        rows = cur.execute('SELECT DISTINCT environment FROM Endpoints WHERE server_type=?', ('Realtime',)).fetchall()
-    server_type = "Realtime"
-    if user == 'Tester':
-        return render_template('Tester_ServerType.html', user=user, server_type=server_type, rows=rows)
-    else:
-        return render_template('Admin_ServerType.html', user=user, server_type=server_type, rows=rows)
-
-
-@app.route("/<user>/Batch")
-def batch_dashboard(user):
-    with sq.connect("test.db") as con:
-        cur = con.cursor()
-        rows = cur.execute('SELECT DISTINCT environment FROM Endpoints WHERE server_type=?', ('Batch',)).fetchall()
-    server_type = "Batch"
-    if user == 'Tester':
-        return render_template('Tester_ServerType.html', user=user, server_type=server_type, rows=rows)
-    else:
-        return render_template('Admin_ServerType.html', user=user, server_type=server_type, rows=rows)
-
-
-@app.route("/<user>/Online")
-def online_dashboard(user):
-    with sq.connect("test.db") as con:
-        cur = con.cursor()
-        rows = cur.execute('SELECT DISTINCT environment FROM Endpoints WHERE server_type=?', ('online',)).fetchall()
-    server_type = "Online"
+        rows = cur.execute('SELECT DISTINCT environment FROM Endpoints WHERE server_type=?', (server_type,)).fetchall()
+    # server_type = "Realtime"
     if user == 'Tester':
         return render_template('Tester_ServerType.html', user=user, server_type=server_type, rows=rows)
     else:
@@ -130,7 +106,7 @@ def environment(user, server_type, env):
         else:
             flash("{}  Have some issues ! Reach out to BRF Team !".format(env), "error")
     if user == 'Tester':
-        return render_template('Tester_environment.html', user=user, server_type=server_type, env=env, rows=rows)
+        return redirect(url_for('server_type_dashboard', user=user, server_type=server_type))
     else:
         return render_template('Admin_environment.html', user=user, server_type=server_type, env=env, rows=rows)
 
@@ -139,7 +115,6 @@ def environment(user, server_type, env):
 def run_test(user, server_type, env):
     if request.method == "POST":
         endpoint = request.form['endpoint']
-        print(endpoint)
         resp = test_url(endpoint)
         if resp < 300:
             flash("{} Validated Successfully !".format(endpoint), "success")

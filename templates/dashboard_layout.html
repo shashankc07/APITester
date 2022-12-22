@@ -17,20 +17,20 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li>
-        <a href="{{url_for('realtime_dashboard', user=user)}}" class="nav-link link-dark">
-          <svg class="btn btn-toggle bi pe-none me-2" width="16" height="16"><use xlink:href="/Admin/Realtime"></use></svg>
+        <a href="{{url_for('server_type_dashboard', user=user, server_type='Realtime')}}" class="nav-link link-dark">
+          <svg class="btn btn-toggle bi pe-none me-2" width="16" height="16"><use xlink:href="/Realtime"></use></svg>
           Realtime
         </a>
       </li>
       <li>
-        <a href="{{url_for('batch_dashboard', user=user)}}" class="nav-link link-dark">
-          <svg class="btn btn-toggle bi pe-none me-2" width="16" height="16"><use xlink:href="/Admin/Batch"></use></svg>
+        <a href="{{url_for('server_type_dashboard', user=user, server_type='Batch')}}" class="nav-link link-dark">
+          <svg class="btn btn-toggle bi pe-none me-2" width="16" height="16"><use xlink:href="/Batch"></use></svg>
           Batch
         </a>
       </li>
       <li>
-        <a href="{{url_for('online_dashboard', user=user)}}" class="nav-link link-dark">
-          <svg class="btn btn-toggle bi pe-none me-2" width="16" height="16"><use xlink:href="/Admin/Online"></use></svg>
+        <a href="{{url_for('server_type_dashboard', user=user, server_type='Online')}}" class="nav-link link-dark">
+          <svg class="btn btn-toggle bi pe-none me-2" width="16" height="16"><use xlink:href="/Online"></use></svg>
           Online
         </a>
       </li>
