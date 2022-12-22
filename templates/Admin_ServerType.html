@@ -39,16 +39,50 @@
         </div>
         <div class="row input-group mb-3">
         <label for="server_type" class="form-label">Server Type</label>
-        <select class="form-select" id="server_type" name="server_type" required>
-          <option selected>Choose...</option>
-          <option value="Realtime">Realtime</option>
-          <option value="Batch">Batch</option>
-          <option value="Online">Online</option>
+        <select class="form-select" id="server_type" name="server_type">
+          <option selected value="{{server_type}}">{{server_type}}</option>
         </select>
         </div>
         <div class="row input-group mb-3">
           <label for="env" class="form-label">Environment</label>
-          <input type="text" id="env" class="form-control" placeholder="DIF/SE/PL1..." aria-label="environment" aria-describedby="basic-addon2" name="environment" required>
+          <select class="form-select" id="env" name="environment">
+            <option selected>Choose...</option>
+            {% if server_type == 'Realtime' %}
+            <option value="DIF">DIF</option>
+            <option value="SE">SE</option>
+            <option value="PL1">PL1</option>
+            <option value="PL2">PL2</option>
+            <option value="QA">QA</option>
+            <option value="PODA">PODA</option>
+            <option value="PODB">PODB</option>
+            <option value="PODC">PODC</option>
+            <option value="PODD">PODD</option>
+            <option value="PODE">PODE</option>
+            <option value="PODF">PODF</option>
+
+            {% elif server_type == 'Batch' %}
+            <option value="SE">SE</option>
+            <option value="PL1">PL1</option>
+            <option value="PL2">PL2</option>
+            <option value="QA">QA</option>
+            <option value="PODA">PODA</option>
+            <option value="PODC">PODC</option>
+            <option value="PODD">PODD</option>
+            <option value="PODF">PODF</option>
+
+            {% else %}
+            <option value="DIF">DIF</option>
+            <option value="SE">SE</option>
+            <option value="PL1">PL1</option>
+            <option value="PL2">PL2</option>
+            <option value="QA">QA</option>
+            <option value="PODA">PODA</option>
+            <option value="PODB">PODB</option>
+            <option value="PODC">PODC</option>
+            <option value="PODD">PODD</option>
+
+            {% endif %}
+          </select>
         </div>
     </div>
       <div class="modal-footer">

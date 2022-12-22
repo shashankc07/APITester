@@ -65,12 +65,11 @@ def server_type_dashboard(user, server_type):
 def add_url(server_type):
     if request.method == "POST":
         endpoint = request.form['endpoint']
-        req_server_type = request.form['server_type']
         env = request.form['environment']
         with sq.connect("test.db") as con:
             cur = con.cursor()
             cur.execute('''INSERT INTO Endpoints (endpoint, server_type, environment)
-            VALUES (?, ?, ?) ''', (endpoint, req_server_type, env))
+            VALUES (?, ?, ?) ''', (endpoint, server_type, env))
             con.commit()
         flash("URL added successfully !", "success")
         return redirect(url_for('server_type_dashboard', user='Admin', server_type=server_type))
