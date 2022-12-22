@@ -61,22 +61,21 @@ def server_type_dashboard(user, server_type):
         return render_template('Admin_ServerType.html', user=user, server_type=server_type, rows=rows)
 
 
-@app.route("/AddUrl", methods=["POST", "GET"])
-def add_url():
-    user = 'Admin'
+@app.route("/<server_type>/AddUrl", methods=["POST", "GET"])
+def add_url(server_type):
     if request.method == "POST":
         endpoint = request.form['endpoint']
-        server_type = request.form['server_type']
+        req_server_type = request.form['server_type']
         env = request.form['environment']
-        print(endpoint, server_type, env)
         with sq.connect("test.db") as con:
             cur = con.cursor()
             cur.execute('''INSERT INTO Endpoints (endpoint, server_type, environment)
-            VALUES (?, ?, ?) ''', (endpoint, server_type, env))
+            VALUES (?, ?, ?) ''', (endpoint, req_server_type, env))
             con.commit()
-        return redirect(url_for('admin_page'))
+        flash("URL added successfully !", "success")
+        return redirect(url_for('server_type_dashboard', user='Admin', server_type=server_type))
 
-    return render_template('AddUrl.html', user=user)
+    return redirect(url_for('server_type_dashboard', user='Admin', server_type=server_type))
 
 
 @app.route("/<user>/CustomTest", methods=["POST", "GET"])
